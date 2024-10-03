@@ -1,0 +1,3 @@
+Rótulo,# Amostras,Média,Mín.,Máx.,Desvio Padrão,% de Erro,Vazão,KB/s,Sent KB/sec,Média de Bytes
+Requisição HTTP,500,7888,2281,20703,2450.74,0.000%,23.72142,162.67,6.12,7021.9
+TOTAL,500,7888,2281,20703,2450.74,0.000%,23.72142,162.67,6.12,7021.9
