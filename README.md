@@ -2,11 +2,6 @@
 
 Este repositório contém os resultados dos testes de carga realizados em uma aplicação utilizando o [Apache JMeter](https://jmeter.apache.org/). Cada teste foi configurado com diferentes números de threads (100, 500, 1000, 2000, 2999, 3969), e os resultados são apresentados por meio de gráficos agregados, gráficos de latência, e arquivos CSV com o resumo das métricas.
 
-## Estrutura do Repositório
-
-- **assets/**: Contém os gráficos e resumos CSV organizados por tipo de métrica.
-- **tests/**: Pasta com os dados brutos de cada teste, incluindo gráficos agregados, latência e arquivos CSV.
-
 ## Descrição dos Testes
 
 Os testes de carga foram realizados para medir a performance da aplicação em diferentes níveis de stress, simulando múltiplos usuários simultâneos. Abaixo está uma visão geral dos resultados com base em cada número de threads.
@@ -44,17 +39,18 @@ Conforme o número de threads aumenta, notamos um aumento significativo na porce
 - A partir de **2000 threads**, observamos **23.6% de erro**, o que pode indicar uma saturação do servidor.
 - Em **2999 threads**, o erro aumentou drasticamente para **76.56%**, sugerindo que o servidor está falhando em lidar com o volume de requisições.
 - No teste com **3969 threads**, o erro chegou a **95.74%**, mostrando que o sistema praticamente colapsou sob essa carga.
+- Em testes anteriores, o erro de **100%** parece indicar um possível bloqueio da aplicação em decorrencia de suspeita de ataque.
 
 ### Análise de Desempenho
 
-1. **Tempo Médio de Resposta**: Aumenta significativamente com o número de threads, saindo de **3.176 ms** para **45.890 ms** no teste com 3969 threads, indicando que o servidor tem dificuldade em processar grandes volumes de requisições simultâneas.
+1. **Tempo Médio de Resposta**: Observa-se um aumento significativo no tempo médio de resposta à medida que o número de threads cresce, passando de **3.176 ms** para **45.890 ms** no teste realizado com 3969 threads, o que indica que o servidor enfrenta dificuldades para lidar com um elevado volume de requisições simultâneas.
 
-2. **Desvio Padrão**: Também aumenta drasticamente com o número de threads. No caso de 3969 threads, o desvio padrão foi de **5340 ms**, o que reflete uma variação considerável nos tempos de resposta.
+2. **Desvio Padrão**: O desvio padrão também apresenta um aumento acentuado com o incremento do número de threads. Para 3969 threads, o desvio padrão registrado foi de **5340 ms**, evidenciando uma variação substancial nos tempos de resposta.
 
-3. **Vazão**: Curiosamente, a vazão (requisições por segundo) aumentou com o número de threads até **2999 threads**, chegando a **43.85 req/s**, mas decaiu levemente para **42.81 req/s** no teste com **3969 threads**, sugerindo que o servidor começa a falhar em processar as requisições de forma eficiente.
+3. **Vazão**: De maneira interessante, a vazão (requisições por segundo) aumentou com o crescimento do número de threads até atingir **2999 threads**, alcançando **43.85 req/s**. No entanto, houve uma leve diminuição para **42.81 req/s** no teste com **3969 threads**, o que sugere que o servidor começa a apresentar falhas na eficiência do processamento das requisições.
 
 ### Conclusões
 
-A aplicação testada demonstra bom desempenho com até **1000 threads** sem apresentar erros. A partir de **2000 threads**, o número de erros começa a crescer, atingindo um pico de **95.74%** de falhas com **3969 threads**, sugerindo que a capacidade de processamento do servidor foi ultrapassada. O aumento da **latência** e o **tempo de resposta** indicam que a aplicação não está dimensionada para suportar esse nível de carga.
+A aplicação avaliada apresenta um desempenho satisfatório com até **1000 threads**, sem registrar falhas. No entanto, ao se aumentar para **2000 threads**, observa-se um crescimento no número de erros, que atinge um máximo de **95,74%** de falhas com **3969 threads**, indicando que a capacidade de processamento do servidor foi excedida. O aumento da **latência** e do **tempo de resposta** revela que a aplicação não está adequadamente dimensionada para lidar com essa carga elevada.
 
-Esses resultados sugerem que a aplicação pode precisar de otimizações, como balanceamento de carga, aumento de recursos de servidor, ou uso de caching, para melhorar sua performance em cenários de alto volume de acessos simultâneos.
+Esses achados indicam que a aplicação pode necessitar de melhorias, como a implementação de balanceamento de carga, ampliação dos recursos do servidor ou a adoção de técnicas de caching, a fim de otimizar seu desempenho em situações de alto tráfego simultâneo.
